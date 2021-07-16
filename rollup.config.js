@@ -28,7 +28,7 @@ export default {
       ],
     }),
     commonjs({
-      exclude: "node_modules/**",
+      include: "node_modules/rusha/**",
     }),
     resolve({
       browser: true,
