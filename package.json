@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "coo11's image host",
   "main": "src/js/main.js",
-  "dependencies": {},
+  "dependencies": {
+    "rusha": "^0.8.14"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
