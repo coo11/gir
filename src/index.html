@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+    <link href="./main.min.css" rel="stylesheet" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-fileinput@5.0.8/css/fileinput.min.css" rel="stylesheet"
+        crossorigin="anonymous"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/rusha@0.8.14/dist/rusha.min.js" crossorigin="anonymous"></script> -->
+    <title>coo11's Image Host</title>
+</head>
+
+<body class="mb-2">
+    <nav class="navbar sticky-top navbar-expand-sm navbar-dark shadow-sm">
+        <a class="navbar-brand" href="/">GIR</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll"
+            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav mr-auto my-2 my-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal"" href=" #configModal">Config</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#help" role="button" aria-expanded="false"
+                        aria-controls="help">Help</a>
+                </li>
+            </ul>
+            <a class="nav-link p-0" id="avatar" href="https://github.com/" target="_blank" rel="noopener"
+                aria-label="GitHub">
+                <img class="img-fluid rounded-circle" alt="Avatar">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Container -->
+    <div class="container mt-1">
+        <div class="collapse pt-2" id="help">
+            <div class="card card-body">
+                <h4>What is this?</h4>
+                <p>GIR, means Github Image Repository, is an upload page that regard Github repository as an image bed.
+                </p>
+                <h4>How to use it?</h4>
+                <ol>
+                    <li>Create an Github public repository and generate an access token.</li>
+                    <li>Click the "Config" on the top of this page and validate access token.</li>
+                    <li>Select repository address and branch in the modal view.</li>
+                    <li>Just save and have fun uploading!</li>
+                </ol>
+                <h4>Is my data safe?</h4>
+                <ul>
+                    <li>First your repository should be public. Thus your image data is also public.</li>
+                    <li>Your repository address and access token data stored in localstorage.</li>
+                    <li>This is just a simple static page.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="jumbotron bg-transparent p-0 mt-1 mb-0">
+            <h1 class="user-select-none display-4">Image Upload</h1>
+            <p class="user-select-none lead my-0">10 MB max per file. 10 files max per request.</p>
+            <hr class="my-3">
+        </div>
+        <form enctype="multipart/form-data">
+            <div class="file-loading">
+                <input multiple type="file" id="file" data-min-file-count="1" accept="image/*">
+            </div>
+        </form>
+        <div class="my-3 d-none" id="showTime">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tabPreview" data-toggle="tab" href="#imgPreview" role="tab"
+                        aria-controls="imgPreview" aria-selected="true">Preview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tabBBCode" data-toggle="tab" href="#imgBBCode" role="tab"
+                        aria-controls="imgBBCode" aria-selected="false">BBCode</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tabHTML" data-toggle="tab" href="#imgHTML" role="tab"
+                        aria-controls="imgHTML" aria-selected="false">HTML</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tabURL" data-toggle="tab" href="#imgURL" role="tab" aria-controls="imgURL"
+                        aria-selected="false">URL</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tabMarkdown" data-toggle="tab" href="#imgMarkdown" role="tab"
+                        aria-controls="imgMarkdown" aria-selected="false">Markdown</a>
+                </li>
+            </ul>
+            <div class="custom-control custom-switch my-3 text-right">
+                <input type="checkbox" class="custom-control-input" id="isUseCDN">
+                <label class="custom-control-label user-select-none" for="isUseCDN">使用 jsDelivr</label>
+            </div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="imgPreview" role="tabpanel" aria-labelledby="tabPreview">
+                </div>
+                <div class="tab-pane fade" id="imgBBCode" role="tabpanel" aria-labelledby="tabBBCode">
+                    <pre><code id="codeBBCode"></code></pre>
+                </div>
+                <div class="tab-pane fade" id="imgHTML" role="tabpanel" aria-labelledby="tabHTML">
+                    <pre><code id="codeHTML"></code></pre>
+                </div>
+                <div class="tab-pane fade" id="imgURL" role="tabpanel" aria-labelledby="tabURL">
+                    <pre><code id="codeURL"></code></pre>
+                </div>
+                <div class="tab-pane fade" id="imgMarkdown" role="tabpanel" aria-labelledby="tabMarkdown">
+                    <pre><code id="codeMarkdown"></code></pre>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="configModalTitle">Config</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="validateToken">
+                            <label for="tokenInput" id="tokenTipLabel">Your Github repository's access token</label>
+                            <input type="text" class="form-control" id="tokenInput" placeholder="access token"
+                                aria-describedby="tokenTipLabel" required>
+                            <div class="invalid-feedback"></div>
+                            <div class="valid-feedback"></div>
+                        </form>
+                    </div>
+                    <div class="collapse my-2" id="configRepo">
+                        <form id="validateInfo">
+                            <div class="form-row px-0">
+                                <div class="col-md-6">
+                                    <label for="selectRepo">Your repository</label>
+                                    <select class="custom-select" id="selectRepo" disabled>
+                                        <option selected disabled value="">Choose a repository...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="selectBranch">Repository branch</label>
+                                    <select class="custom-select" id="selectBranch" disabled>
+                                        <option selected disabled value="0">DEFAULT</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3 mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="customName"
+                                        data-toggle="collapse" data-target="#nameRule" aria-expanded="false"
+                                        aria-controls="nameRule">
+                                    <label class="form-check-label user-select-none" for="customName">
+                                        Custom file name instead of using original name
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-row mx-0">
+                                <div class="collapse" id="nameRule">
+                                    <input type="text" class="form-control" id="nameRuleInput"
+                                        placeholder="{MM}{dd}_{sha1}" aria-describedby="nameFormatTip">
+                                    <small id="nameFormatTip" class="form-text text-muted mb-1">
+                                        Your can use the following tag
+                                        <code>{yyyy}{MM}{dd}{hh}{mm}{ss}</code>,
+                                        <code>{UUID}</code>, <code>{sha1}</code>,
+                                        <code>{ts10}{ts13}</code> as timestamp or <code>{name}</code>,
+                                        etc. More
+                                        importantly,
+                                        you should ensure that the uploaded file will not have the same name
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="customPath"
+                                        data-toggle="collapse" data-target="#pathRule" aria-expanded="false"
+                                        aria-controls="pathRule">
+                                    <label class="form-check-label user-select-none" for="customPath">
+                                        Custom path to upload instead of using root directory
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-row mx-0">
+                                <div class="collapse" id="pathRule">
+                                    <input type="text" class="form-control" id="pathRuleInput" placeholder="{yyyy}/"
+                                        aria-describedby="pathTip">
+                                    <small id="pathTip" class="form-text text-muted mb-1">
+                                        Your can use the following tag
+                                        <code>{yyyy}{MM}{dd}</code> in your custom path. Directory
+                                        will be created if
+                                        not exist.
+                                    </small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="cancelButton"
+                        data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger btn-sm" id="resetButton">Reset</button>
+                    <button type="submit" class="btn btn-success btn-sm" form="validateToken"
+                        id="saveButton">Validate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="srcInfoDelModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="srcInfoDelTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="srcInfoDelTitle"><span>Clear</span> Confirm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to <span>clear all</span> upload history?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn btn-secondary" id="srcInfoDelSoft"
+                        data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn btn-success" id="srcInfoDel">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./main.min.js"></script>
+    <footer class="container">
+        <p class="text-center">© 2021 Telegram<a href="https://t.me/coo11" target="_blank" rel="noopener">@coo11</a>
+            &amp; licensed BSD 3-Clause.</p>
+    </footer>
+</body>
+</html>

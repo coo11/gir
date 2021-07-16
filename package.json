@@ -1,0 +1,19 @@
+{
+  "name": "gir",
+  "version": "1.0.0",
+  "description": "coo11's image host",
+  "main": "src/js/main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "rollup": "^2.53.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "author": "coo11",
+  "license": "ISC"
+}

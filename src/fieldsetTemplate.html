@@ -1,0 +1,30 @@
+<fieldset>
+    <legend><img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHfSURBVDjLpZO9a5NhFMV/bxowYvNRjf1IoCDo0KFJBVHEVbeCi5N/gM6KruLi6KiDKA6KIC6CQwdtBxfRrUGHFlTQIlikjTFpkua55zo8r7aDipALd3keOOdwzrmJuzPMZF/cOPFXBMmRHJMTTJiJYCIEESy+ZQGqczPIDNxxd/AMDriBu+MSCkJmSA4CJ8Pym+UIIAs0177S3Wz9F3O+WGCiMrmjwM3pbrZ4fvo17kR237XAtcolRvdOA+L+9TscHB/HTGQAlLqwuHWbxa1b9JMVTBDSHRi82qijbgPXNsGEpx5kouYo+2jpI/3kCUudiwzUJBgMAoQAjf4ZFtZP0mq/x0xIYPJUQQoQLHAsX8fMeNk7y4DVCGKw0q7ytHmByx/u/lYgOVnJUbBomAa8azWYr5b50unRGZln48ccYzrH5/VTtHuTKIxQk8dUdgMEE/XyN2YPTFHJHaZWFPIan/KriEccqT5ExJi15FiwWCSTo+CYiYk9h5CL4NvIhSOmctOxCwgh3J3vauAWnc8GEzInt2+U3s1nuEWwmPlOByzthuSUSyV+XUDWTOAJxbEyhcJ+pPgxc/4KnbUFQOTKx3n74B5uQhI4JEkMMHl8ddZ3d/tfzH+aZNhrzDDk/ARfG6G/LNZPQgAAAABJRU5ErkJggg=="
+            alt="">
+    </legend>
+    <div class="d-md-flex align-items-center">
+        <div class="px-2 py-1 text-center">
+            <a href="${url}" target="_blank" rel="noopener">
+                <img class="lazy" src="https://p.sda1.dev/2/a732cf75c6a5e52dac5363790d21ea63"></a>
+        </div>
+        <div class="px-2 py-1 w-100">
+            <div>
+                <label class="w-100">URL<input class="form-control form-control-sm" onclick="this.select();"
+                        value="${url}"></label>
+            </div>
+            <div>
+                <label class="w-100">Markdown<input class="form-control form-control-sm" onclick="this.select();"
+                        value="![](${url})"></label>
+            </div>
+            <div>
+                <label class="w-100">HTML<input class="form-control form-control-sm" onclick="this.select();"
+                        value="&lt;img src=&quot;${url}&quot;&gt;"></label>
+            </div>
+            <div>
+                <label class="w-100">BBCode<input class="form-control form-control-sm" onclick="this.select();"
+                        value="[img]${url}[/img]"></label>
+            </div>
+        </div>
+    </div>
+</fieldset>
