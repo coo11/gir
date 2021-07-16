@@ -10,7 +10,6 @@ export default {
     format: "iife",
     globals: {
       jquery: "$",
-      rusha: "Rusha",
     },
     sourcemap: false,
   },
@@ -36,5 +35,5 @@ export default {
     }),
     terser(),
   ],
-  external: ["jquery", "bootstrap", "rusha"],
+  external: ["jquery", "bootstrap"],
 };
