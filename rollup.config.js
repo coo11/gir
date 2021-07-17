@@ -8,9 +8,6 @@ export default {
   output: {
     file: "dist/main.min.js",
     format: "iife",
-    globals: {
-      jquery: "$",
-    },
     sourcemap: false,
   },
   plugins: [
@@ -28,7 +25,7 @@ export default {
       ],
     }),
     commonjs({
-      include: "node_modules/rusha/**",
+      include: /node_modules/, // https://github.com/rollup/rollup-plugin-commonjs/issues/361#issuecomment-445214136
     }),
     resolve({
       browser: true,

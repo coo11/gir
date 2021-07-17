@@ -1,5 +1,3 @@
-import $ from "jquery";
-import "bootstrap";
 import "./fileinput.mod";
 import Rusha from "rusha";
 
@@ -556,7 +554,6 @@ const buildUp = {
   initConfig() {
     let self = this;
     this.input.fileinput({
-      theme: "fas",
       uploadUrl: "https://api.github.com/repos/user/repo/git/blobs",
       beforeAjaxEnqueue: (fileId, settings) => {
         const body = {

@@ -2,7 +2,7 @@
   "name": "gir",
   "version": "1.0.0",
   "description": "coo11's image host",
-  "main": "src/js/main.js",
+  "main": "rollup.config.js",
   "dependencies": {
     "rusha": "^0.8.14"
   },
