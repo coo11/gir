@@ -440,10 +440,11 @@ const buildUp = {
         type = "image/webp";
         break;
       case "3c3f786d":
+      case "3c737667":
         type = "image/svg+xml";
         break;
       default:
-        if (header.startsWith("424d")) type = "image/bmp";
+        if (hex.startsWith("424d")) type = "image/bmp";
         type = "/";
         break;
     }
